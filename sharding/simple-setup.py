@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/env python
 
 import os
 import sys
@@ -23,12 +23,12 @@ except ImportError:
 
 # some settings can also be set on command line. start with --help to see options
 
-BASE_DATA_PATH='/data/db/sharding/' #warning: gets wiped every time you run this
+BASE_DATA_PATH='/Users/giupo/data/db/sharding/' #warning: gets wiped every time you run this
 MONGO_PATH=os.getenv( "MONGO_HOME" , os.path.expanduser('~/10gen/mongo/') )
 N_SHARDS=3
-N_CONFIG=1 # must be either 1 or 3
+N_CONFIG=3 # must be either 1 or 3
 N_MONGOS=1
-CHUNK_SIZE=64 # in MB (make small to test splitting)
+CHUNK_SIZE=1 # in MB (make small to test splitting)
 MONGOS_PORT=27017 if N_MONGOS == 1 else 10000 # start at 10001 when multi
 USE_SSL=False # set to True if running with SSL enabled
 
@@ -104,8 +104,8 @@ if os.path.exists(BASE_DATA_PATH):
     print( "removing tree: %s" % BASE_DATA_PATH )
     shutil.rmtree(BASE_DATA_PATH)
 
-mongod = MONGO_PATH + 'mongod'
-mongos = MONGO_PATH + 'mongos'
+mongod = MONGO_PATH + '/bin/mongod'
+mongos = MONGO_PATH + '/bin/mongos'
 
 devnull = open('/dev/null', 'w+')
 
